@@ -1,0 +1,30 @@
+name: Daily Outreach Scheduler
+
+on:
+  schedule:
+    # This runs at 09:00 AM UTC every single day
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Allows you to trigger it manually too
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install pandas gspread google-auth
+
+      - name: Run outreach script
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          SHEET_URL: ${{ secrets.SHEET_URL }}
+          GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+        run: python daily_worker.py
