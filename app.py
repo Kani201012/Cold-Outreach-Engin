@@ -31,38 +31,31 @@ def parse_spintax(text):
         text = text[:match.start()] + random.choice(options) + text[match.end():]
     return text
 
-# --- HIGH-END HTML TEMPLATE ---
-def get_professional_template(name, category, address):
+# --- HTML UI ENGINE (Fixed Curly Bracket Bug) ---
+def get_professional_template(greeting, name, category, address):
+    # Clean the address: if it contains a rating like 4.7(39), hide it
+    if "(" in address and "." in address:
+        display_address = "your area"
+    else:
+        display_address = address
+
     html = f"""
     <html>
-    <body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #1a1a1a;">
+    <body style="margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f2f5; color: #1a1a1a;">
         <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e1e4e8;">
-            
-            <!-- Branding Header -->
             <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 40px 20px; text-align: center;">
                 <h1 style="color: #2dd4bf; margin: 0; font-size: 28px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">STOP WEB RENT</h1>
-                <p style="color: #94a3b8; margin: 8px 0 0 0; font-size: 14px; font-weight: 500;">Proprietary Titan Engine Architecture</p>
+                <p style="color: #94a3b8; margin: 8px 0 0 0; font-size: 14px;">High-Velocity Web Architecture</p>
             </div>
-
-            <!-- Content Body -->
             <div style="padding: 40px 35px;">
-                <h2 style="color: #0f172a; font-size: 22px; margin-top: 0;">{{Greeting}} {name} team,</h2>
-                
+                <h2 style="color: #0f172a; font-size: 22px; margin-top: 0;">{greeting} {name} team,</h2>
                 <p style="font-size: 16px; line-height: 1.7; color: #475569;">
-                    I was researching <strong>{category}</strong> services in <strong>{address}</strong> and noticed your clinic has an outstanding reputation. However, you are currently missing a critical asset: <strong>A "Website" button on your Google Maps profile.</strong>
+                    I was recently researching <strong>{category}</strong> services in <strong>{display_address}</strong> and noticed your clinic has an outstanding reputation. However, you are currently missing a critical asset: <strong>A "Website" button on your Google Maps profile.</strong>
                 </p>
-
                 <div style="background-color: #fff1f2; border-left: 5px solid #f43f5e; padding: 20px; margin: 30px 0;">
-                    <strong style="color: #9f1239; font-size: 16px;">The 2026 Ranking Risk:</strong><br>
-                    <span style="color: #be123c;">Google’s AI now prioritizes clinics with linked, high-speed websites. Without that button, you are losing high-value patients to competitors every single day.</span>
+                    <strong style="color: #9f1239;">The 2026 Ranking Risk:</strong><br>
+                    <span style="color: #be123c;">Google now prioritizes clinics with linked, high-speed websites. Without that button, you are losing high-value patients to competitors every single day.</span>
                 </div>
-
-                <h3 style="color: #0f172a; border-bottom: 2px solid #2dd4bf; display: inline-block; margin-bottom: 15px;">The Titan Solution</h3>
-                <p style="font-size: 16px; line-height: 1.7; color: #475569;">
-                    We deploy <strong>0.1s Load Speed</strong> frameworks that are unhackable and cost <strong>$0 in monthly hosting fees</strong>.
-                </p>
-
-                <!-- Comparison Table -->
                 <table style="width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 14px; border: 1px solid #e2e8f0;">
                     <tr style="background-color: #f8fafc;">
                         <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0;">Cost Category</th>
@@ -80,31 +73,14 @@ def get_professional_template(name, category, address):
                         <td style="padding: 12px; text-align: center;">$2,115</td>
                     </tr>
                 </table>
-
-                <p style="font-size: 16px; font-weight: bold; color: #0f172a; text-align: center; margin-top: 30px;">
-                    Exclusive Offer: A Free 24-Hour Preview
-                </p>
-                <p style="font-size: 15px; text-align: center; color: #475569;">
-                    I will use your <strong>current logo and clinic photos</strong> to build a live demo. If you don't love the performance, you pay nothing.
-                </p>
-
-                <!-- Call to Action Buttons -->
                 <div style="text-align: center; margin-top: 35px;">
                     <a href="https://wa.me/966572562151?text=YES" style="background-color: #0d9488; color: #ffffff; padding: 16px 30px; text-decoration: none; border-radius: 8px; font-weight: 700; display: block; margin-bottom: 15px; font-size: 16px;">REPLY 'YES' FOR FREE DEMO</a>
-                    
-                    <a href="https://kiranmondal.gumroad.com/l/titanv50" style="color: #0d9488; font-size: 14px; font-weight: 600; text-decoration: underline;">GET Your Website within 24 Hours (Direct Purchase)</a>
+                    <a href="https://kiranmondal.gumroad.com/l/titanv50" style="color: #0d9488; font-size: 14px; font-weight: 600;">GET Your Website within 24 Hours (Direct Purchase)</a>
                 </div>
             </div>
-
-            <!-- Footer -->
             <div style="background-color: #f8fafc; padding: 35px; text-align: center; border-top: 1px solid #e2e8f0; font-size: 12px; color: #64748b;">
-                <p style="margin: 0; font-weight: bold; font-size: 14px; color: #334155;">Kiran Deb Mondal</p>
-                <p style="margin: 4px 0;">Principal Business Technologist | Stop Web Rent</p>
-                <p style="margin: 10px 0;">
-                    <a href="https://www.StopWebRent.com" style="color: #0d9488; text-decoration: none;">www.StopWebRent.com</a> | 
-                    <a href="https://wa.me/966572562151" style="color: #0d9488; text-decoration: none;">WhatsApp Support</a>
-                </p>
-                <p style="margin-top: 25px; opacity: 0.6;">To opt-out, please reply "STOP".</p>
+                <p><strong>Kiran Deb Mondal</strong> | Principal Business Technologist</p>
+                <p><a href="https://www.StopWebRent.com" style="color: #0d9488; text-decoration: none;">www.StopWebRent.com</a></p>
             </div>
         </div>
     </body>
@@ -114,7 +90,6 @@ def get_professional_template(name, category, address):
 
 # --- STREAMLIT APP ---
 st.title("🛡️ Stop Web Rent Outreach Engine")
-st.markdown("High-Conversion HTML Outreach | Professional SaaS UI")
 
 with st.expander("⚙️ Settings & Credentials", expanded=True):
     col1, col2 = st.columns(2)
@@ -129,22 +104,17 @@ if sheet_url:
         data = worksheet.get_all_records()
         df = pd.DataFrame(data)
         
-        st.success(f"✅ Connected to '{sh.title}'! Total Leads: {len(df)}")
+        st.success(f"✅ Connected to Sheet! {len(df)} leads found.")
+        limit = st.number_input("Send Limit", value=50)
         
-        limit = st.number_input("How many to send in this batch?", value=50)
-        
-        if st.button("🚀 LAUNCH PROFESSIONAL CAMPAIGN", type="primary"):
+        if st.button("🚀 LAUNCH CAMPAIGN", type="primary"):
             server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
             server.login(smtp_user, smtp_pass)
             
-            # GET COLUMN MAPPING (This fixes your update issue)
+            # --- FIXED COLUMN MAPPING ---
             headers = [h.strip() for h in worksheet.row_values(1)]
-            try:
-                col_status_idx = headers.index("Email_Status") + 1
-                col_date_idx = headers.index("Last_Sent_Date") + 1
-            except ValueError:
-                st.error("Error: Make sure your sheet has 'Email_Status' and 'Last_Sent_Date' columns!")
-                st.stop()
+            col_status_idx = headers.index("Email_Status") + 1 if "Email_Status" in headers else 15
+            col_date_idx = headers.index("Last_Sent_Date") + 1 if "Last_Sent_Date" in headers else 16
 
             sent = 0
             for index, row in df.iterrows():
@@ -158,31 +128,32 @@ if sheet_url:
 
                 if "@" not in email or "Sent" in status: continue
                 
-                # Content Prep
-                subject = parse_spintax("{Quick question|Important note|Inquiry} regarding [Name]").replace("[Name]", name)
-                greeting = random.choice(["Hi", "Hello", "Greetings", "Hey there"])
-                html_content = get_professional_template(name, cat, addr).replace("{{Greeting}}", greeting)
+                # Logic Fixes
+                greeting = random.choice(["Hi", "Hello", "Greetings"])
+                subject = parse_spintax("{Quick question|Inquiry} regarding " + name)
+                
+                html_body = get_professional_template(greeting, name, cat, addr)
                 
                 msg = MIMEMultipart()
                 msg['From'] = f"Kiran Deb Mondal <{smtp_user}>"
                 msg['To'] = email
                 msg['Subject'] = subject
-                msg.attach(MIMEText(html_content, 'html'))
+                msg.attach(MIMEText(html_body, 'html'))
                 
                 try:
                     server.send_message(msg)
-                    # UPDATING THE SHEET
+                    # --- FIXED UPDATE LOGIC ---
                     worksheet.update_cell(index + 2, col_status_idx, "Sent")
                     worksheet.update_cell(index + 2, col_date_idx, datetime.now().strftime("%Y-%m-%d"))
                     
                     sent += 1
                     st.write(f"✅ [{sent}] Sent to {name}")
-                    time.sleep(random.randint(60, 120))
+                    time.sleep(random.randint(60, 100))
                 except Exception as e:
-                    st.write(f"❌ Failed for {name}: {e}")
+                    st.error(f"Error sending to {email}: {e}")
 
             server.quit()
-            st.success("Batch Complete! Your Google Sheet has been updated.")
+            st.success("Batch Complete!")
             st.balloons()
             
     except Exception as e:
