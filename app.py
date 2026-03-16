@@ -4,14 +4,13 @@ import smtplib
 import time
 import random
 import re
-import json
 from datetime import datetime
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import gspread
 from google.oauth2.service_account import Credentials
 
-st.set_page_config(page_title="Stop Web Rent | Outreach", page_icon="🛡️", layout="wide")
+st.set_page_config(page_title="Stop Web Rent | Professional Outreach", page_icon="🛡️", layout="wide")
 
 # --- GOOGLE SHEETS CONNECTION ---
 @st.cache_resource
@@ -32,83 +31,80 @@ def parse_spintax(text):
         text = text[:match.start()] + random.choice(options) + text[match.end():]
     return text
 
-# --- PROFESSIONAL HTML TEMPLATE ---
-def get_html_template(name, category, address):
-    # This is the modern UI layout
+# --- HIGH-END HTML TEMPLATE ---
+def get_professional_template(name, category, address):
     html = f"""
     <html>
-    <body style="margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f7f9; color: #333;">
-        <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-            <!-- Header -->
-            <div style="background-color: #1a2b3c; padding: 30px; text-align: center;">
-                <h1 style="color: #20c997; margin: 0; font-size: 24px; letter-spacing: 1px;">STOP WEB RENT</h1>
-                <p style="color: #ffffff; margin: 5px 0 0 0; font-size: 14px; opacity: 0.8;">High-Velocity Web Architecture</p>
+    <body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #1a1a1a;">
+        <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e1e4e8;">
+            
+            <!-- Branding Header -->
+            <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 40px 20px; text-align: center;">
+                <h1 style="color: #2dd4bf; margin: 0; font-size: 28px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">STOP WEB RENT</h1>
+                <p style="color: #94a3b8; margin: 8px 0 0 0; font-size: 14px; font-weight: 500;">Proprietary Titan Engine Architecture</p>
             </div>
 
-            <!-- Body -->
-            <div style="padding: 40px;">
-                <h2 style="color: #1a2b3c; margin-top: 0;">{{Greeting}} {name} team,</h2>
-                <p style="line-height: 1.6; font-size: 16px;">
-                    I was recently researching <strong>{category}</strong> clinics in <strong>{address}</strong> and noticed your clinic has a fantastic reputation on Google Maps. 
-                </p>
-                <p style="line-height: 1.6; font-size: 16px;">
-                    However, I noticed you don’t have a website linked to your profile. As of 2026, Google’s AI significantly prioritizes profiles with high-speed linked sites for local rankings.
+            <!-- Content Body -->
+            <div style="padding: 40px 35px;">
+                <h2 style="color: #0f172a; font-size: 22px; margin-top: 0;">{{Greeting}} {name} team,</h2>
+                
+                <p style="font-size: 16px; line-height: 1.7; color: #475569;">
+                    I was researching <strong>{category}</strong> services in <strong>{address}</strong> and noticed your clinic has an outstanding reputation. However, you are currently missing a critical asset: <strong>A "Website" button on your Google Maps profile.</strong>
                 </p>
 
-                <!-- Risk Alert -->
-                <div style="background-color: #fff5f5; border-left: 4px solid #ff4d4f; padding: 15px; margin: 25px 0;">
-                    <strong style="color: #cf1322;">The Risk:</strong> If your competitors have a "Website" button and you don’t, Google will eventually lower your visibility in the Map Pack.
+                <div style="background-color: #fff1f2; border-left: 5px solid #f43f5e; padding: 20px; margin: 30px 0;">
+                    <strong style="color: #9f1239; font-size: 16px;">The 2026 Ranking Risk:</strong><br>
+                    <span style="color: #be123c;">Google’s AI now prioritizes clinics with linked, high-speed websites. Without that button, you are losing high-value patients to competitors every single day.</span>
                 </div>
 
-                <h3 style="color: #1a2b3c;">The Solution: Titan Engine</h3>
-                <p style="line-height: 1.6; font-size: 16px;">
-                    I have developed a specialized framework designed to help local services dominate without "Web Rent" (monthly subscriptions).
+                <h3 style="color: #0f172a; border-bottom: 2px solid #2dd4bf; display: inline-block; margin-bottom: 15px;">The Titan Solution</h3>
+                <p style="font-size: 16px; line-height: 1.7; color: #475569;">
+                    We deploy <strong>0.1s Load Speed</strong> frameworks that are unhackable and cost <strong>$0 in monthly hosting fees</strong>.
                 </p>
 
-                <!-- Features List -->
-                <ul style="padding-left: 20px; line-height: 2;">
-                    <li>🚀 <strong>0.1s Speed:</strong> Ranked #1 by Google algorithms.</li>
-                    <li>💰 <strong>Zero Hosting:</strong> Pay once, own it forever.</li>
-                    <li>🛡️ <strong>Unhackable:</strong> No database, zero security risk.</li>
-                </ul>
+                <!-- Comparison Table -->
+                <table style="width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 14px; border: 1px solid #e2e8f0;">
+                    <tr style="background-color: #f8fafc;">
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0;">Cost Category</th>
+                        <th style="padding: 12px; text-align: center; border-bottom: 2px solid #e2e8f0; color: #0d9488;">Titan Engine</th>
+                        <th style="padding: 12px; text-align: center; border-bottom: 2px solid #e2e8f0;">Wix/Shopify</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Annual Rent</td>
+                        <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e2e8f0; font-weight: bold; color: #0d9488;">$0</td>
+                        <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e2e8f0;">$348+</td>
+                    </tr>
+                    <tr style="background-color: #f0fdfa;">
+                        <td style="padding: 12px; font-weight: bold;">5-Year Total</td>
+                        <td style="padding: 12px; text-align: center; font-weight: 800; color: #0d9488;">$274</td>
+                        <td style="padding: 12px; text-align: center;">$2,115</td>
+                    </tr>
+                </table>
 
-                <!-- Financial Table -->
-                <div style="margin: 30px 0;">
-                    <table style="width: 100%; border-collapse: collapse; font-size: 14px; text-align: left;">
-                        <thead>
-                            <tr style="background-color: #1a2b3c; color: #ffffff;">
-                                <th style="padding: 12px; border: 1px solid #ddd;">Category</th>
-                                <th style="padding: 12px; border: 1px solid #ddd;">Titan Engine</th>
-                                <th style="padding: 12px; border: 1px solid #ddd;">Wix / Shopify</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="padding: 12px; border: 1px solid #ddd; background-color: #f9f9f9;">Annual Sub.</td>
-                                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold; color: #20c997;">$0</td>
-                                <td style="padding: 12px; border: 1px solid #ddd;">$348+</td>
-                            </tr>
-                            <tr style="background-color: #e6fffa;">
-                                <td style="padding: 12px; border: 1px solid #ddd;"><strong>5-Year Cost</strong></td>
-                                <td style="padding: 12px; border: 1px solid #ddd;"><strong>$274</strong></td>
-                                <td style="padding: 12px; border: 1px solid #ddd;"><strong>$2,115</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <p style="font-size: 16px; font-weight: bold; color: #0f172a; text-align: center; margin-top: 30px;">
+                    Exclusive Offer: A Free 24-Hour Preview
+                </p>
+                <p style="font-size: 15px; text-align: center; color: #475569;">
+                    I will use your <strong>current logo and clinic photos</strong> to build a live demo. If you don't love the performance, you pay nothing.
+                </p>
 
-                <!-- Call to Action -->
-                <div style="text-align: center; margin-top: 40px;">
-                    <p style="font-weight: bold; font-size: 18px;">Ready to secure your Google rank?</p>
-                    <a href="https://wa.me/966572562151?text=YES" style="background-color: #20c997; color: white; padding: 18px 35px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; box-shadow: 0 4px 10px rgba(32, 201, 151, 0.3);">YES, SEND THE DEMO</a>
+                <!-- Call to Action Buttons -->
+                <div style="text-align: center; margin-top: 35px;">
+                    <a href="https://wa.me/966572562151?text=YES" style="background-color: #0d9488; color: #ffffff; padding: 16px 30px; text-decoration: none; border-radius: 8px; font-weight: 700; display: block; margin-bottom: 15px; font-size: 16px;">REPLY 'YES' FOR FREE DEMO</a>
+                    
+                    <a href="https://kiranmondal.gumroad.com/l/titanv50" style="color: #0d9488; font-size: 14px; font-weight: 600; text-decoration: underline;">GET Your Website within 24 Hours (Direct Purchase)</a>
                 </div>
             </div>
 
             <!-- Footer -->
-            <div style="background-color: #f8f9fa; padding: 30px; text-align: center; border-top: 1px solid #eee; font-size: 12px; color: #777;">
-                <p><strong>Kiran Deb Mondal</strong><br>Principal Business Technologist | Stop Web Rent</p>
-                <p>WhatsApp: +966 572562151 | <a href="https://www.StopWebRent.com" style="color: #20c997;">www.StopWebRent.com</a></p>
-                <p style="margin-top: 20px;">If you'd rather not receive these, please reply "STOP".</p>
+            <div style="background-color: #f8fafc; padding: 35px; text-align: center; border-top: 1px solid #e2e8f0; font-size: 12px; color: #64748b;">
+                <p style="margin: 0; font-weight: bold; font-size: 14px; color: #334155;">Kiran Deb Mondal</p>
+                <p style="margin: 4px 0;">Principal Business Technologist | Stop Web Rent</p>
+                <p style="margin: 10px 0;">
+                    <a href="https://www.StopWebRent.com" style="color: #0d9488; text-decoration: none;">www.StopWebRent.com</a> | 
+                    <a href="https://wa.me/966572562151" style="color: #0d9488; text-decoration: none;">WhatsApp Support</a>
+                </p>
+                <p style="margin-top: 25px; opacity: 0.6;">To opt-out, please reply "STOP".</p>
             </div>
         </div>
     </body>
@@ -118,37 +114,38 @@ def get_html_template(name, category, address):
 
 # --- STREAMLIT APP ---
 st.title("🛡️ Stop Web Rent Outreach Engine")
-st.markdown("Modern HTML Outreach System | Permanent Sheet Connection")
+st.markdown("High-Conversion HTML Outreach | Professional SaaS UI")
 
-# 1. SETTINGS
-with st.expander("⚙️ SMTP & Sheet Settings", expanded=True):
+with st.expander("⚙️ Settings & Credentials", expanded=True):
     col1, col2 = st.columns(2)
     smtp_user = col1.text_input("Workspace Email", value="kiran@kaydiemscriptlab.com")
     smtp_pass = col2.text_input("App Password", type="password")
     sheet_url = st.text_input("Google Sheet URL")
 
-# 2. SEQUENCE
-st.subheader("📝 Sequence Details")
-subject_line = st.text_input("Subject Line", value="{Quick question|Important note} regarding [Name]")
-
-# 3. EXECUTION
 if sheet_url:
     try:
         sh = gc.open_by_url(sheet_url)
         worksheet = sh.sheet1
-        df = pd.DataFrame(worksheet.get_all_records())
+        data = worksheet.get_all_records()
+        df = pd.DataFrame(data)
         
-        st.success(f"✅ Connected! Ready to send to **{len(df)}** leads.")
+        st.success(f"✅ Connected to '{sh.title}'! Total Leads: {len(df)}")
         
-        col3, col4 = st.columns(2)
-        limit = col3.number_input("Send Limit", value=50)
+        limit = st.number_input("How many to send in this batch?", value=50)
         
-        if st.button("🚀 LAUNCH CAMPAIGN", type="primary"):
-            if not smtp_pass: st.error("Enter App Password!"); st.stop()
-            
+        if st.button("🚀 LAUNCH PROFESSIONAL CAMPAIGN", type="primary"):
             server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
             server.login(smtp_user, smtp_pass)
             
+            # GET COLUMN MAPPING (This fixes your update issue)
+            headers = [h.strip() for h in worksheet.row_values(1)]
+            try:
+                col_status_idx = headers.index("Email_Status") + 1
+                col_date_idx = headers.index("Last_Sent_Date") + 1
+            except ValueError:
+                st.error("Error: Make sure your sheet has 'Email_Status' and 'Last_Sent_Date' columns!")
+                st.stop()
+
             sent = 0
             for index, row in df.iterrows():
                 if sent >= limit: break
@@ -157,33 +154,36 @@ if sheet_url:
                 name = str(row.get('Business Name', 'Clinic')).strip()
                 cat = str(row.get('Category', 'Dental')).strip()
                 addr = str(row.get('Address', 'your area')).strip()
+                status = str(row.get('Email_Status', ''))
+
+                if "@" not in email or "Sent" in status: continue
                 
-                if "@" not in email or "Sent" in str(row.get('Status', '')): continue
-                
-                # Prepare Content
-                subj = parse_spintax(subject_line.replace("[Name]", name))
+                # Content Prep
+                subject = parse_spintax("{Quick question|Important note|Inquiry} regarding [Name]").replace("[Name]", name)
                 greeting = random.choice(["Hi", "Hello", "Greetings", "Hey there"])
-                html_body = get_html_template(name, cat, addr).replace("{{Greeting}}", greeting)
+                html_content = get_professional_template(name, cat, addr).replace("{{Greeting}}", greeting)
                 
-                # Send Email
                 msg = MIMEMultipart()
                 msg['From'] = f"Kiran Deb Mondal <{smtp_user}>"
                 msg['To'] = email
-                msg['Subject'] = subj
-                msg.attach(MIMEText(html_body, 'html'))
+                msg['Subject'] = subject
+                msg.attach(MIMEText(html_content, 'html'))
                 
-                server.send_message(msg)
-                
-                # Update Sheet (Assume Status is column 17/Q)
-                worksheet.update_cell(index + 2, 17, "Sent")
-                
-                sent += 1
-                st.write(f"✅ [{sent}] Sent to {name}")
-                time.sleep(random.randint(45, 90))
-                
+                try:
+                    server.send_message(msg)
+                    # UPDATING THE SHEET
+                    worksheet.update_cell(index + 2, col_status_idx, "Sent")
+                    worksheet.update_cell(index + 2, col_date_idx, datetime.now().strftime("%Y-%m-%d"))
+                    
+                    sent += 1
+                    st.write(f"✅ [{sent}] Sent to {name}")
+                    time.sleep(random.randint(60, 120))
+                except Exception as e:
+                    st.write(f"❌ Failed for {name}: {e}")
+
             server.quit()
+            st.success("Batch Complete! Your Google Sheet has been updated.")
             st.balloons()
-            st.success("Batch Complete!")
             
     except Exception as e:
         st.error(f"Error: {e}")
