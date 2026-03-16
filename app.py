@@ -107,13 +107,23 @@ def get_html_layout(greeting, name, category, address, is_followup=False):
     </html>
     """
 
-# --- 4. STREAMLIT UI SIDEBAR (Pre-filled) ---
+# --- 4. STREAMLIT UI SIDEBAR (PRE-FILLED) ---
 with st.sidebar:
     st.title("⚙️ Credentials")
-    user_email = st.text_input("Sender Email", value=st.secrets.get("EMAIL_USER", "kiran@kaydiemscriptlab.com"))
-    app_pass = st.text_input("App Password", value=st.secrets.get("EMAIL_PASS", ""), type="password")
-    sheet_url = st.text_input("Google Sheet URL", value=st.secrets.get("SHEET_URL", ""))
-    st.info("App will auto-detect Sequence Step and Follow-ups.")
+    
+    # We pull from st.secrets and use it as the 'value'
+    stored_email = st.secrets.get("EMAIL_USER", "kiran@kaydiemscriptlab.com")
+    stored_pass = st.secrets.get("EMAIL_PASS", "")
+    stored_url = st.secrets.get("SHEET_URL", "")
+
+    user_email = st.text_input("Sender Email", value=stored_email)
+    app_pass = st.text_input("App Password", value=stored_pass, type="password")
+    sheet_url = st.text_input("Google Sheet URL", value=stored_url)
+    
+    if app_pass and sheet_url:
+        st.success("✅ Credentials Loaded from Secrets")
+    else:
+        st.warning("⚠️ Some secrets are missing in Streamlit Settings")
 
 # --- 5. MAIN LOGIC ---
 st.title("🛡️ Master Outreach Engine")
