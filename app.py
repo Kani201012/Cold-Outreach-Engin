@@ -132,7 +132,29 @@ if sheet_url:
     try:
         sh = gc.open_by_url(sheet_url)
         worksheet = sh.sheet1
-        df = pd.DataFrame(worksheet.get_all_records())
+        
+        # --- ROBUST SPREADSHEET PARSER ---
+        # 1. Get all raw data as a list of lists instead of dicts
+        raw_data = worksheet.get_all_values()
+        
+        if not raw_data:
+            st.error("Google Sheet is completely empty!")
+            st.stop()
+            
+        # 2. Extract Row 1 (Headers)
+        raw_headers = raw_data[0]
+        
+        # 3. Clean headers (give generic names to empty/duplicate columns)
+        clean_headers = []
+        for i, h in enumerate(raw_headers):
+            h_str = str(h).strip()
+            if not h_str:
+                clean_headers.append(f"EmptyColumn_{i}")
+            else:
+                clean_headers.append(h_str)
+                
+        # 4. Create the Pandas DataFrame safely
+        df = pd.DataFrame(raw_data[1:], columns=clean_headers)
         st.success(f"✅ Connection Stable. {len(df)} leads loaded.")
 
         limit = st.number_input("Batch Send Limit", value=50)
