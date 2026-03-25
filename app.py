@@ -31,206 +31,178 @@ def parse_spintax(text):
     return text
 
 # --- 3. ULTRA-MODERN APPLE/STRIPE STYLE HTML ENGINE ---
+# --- 3. THE "FOUNDER AESTHETIC" 7-PHASE ENGINE ---
 def get_campaign_content(phase, name, category, address):
     greeting = random.choice(["Hi", "Hello", "Greetings", "Dear"])
     
     display_address = "your city" if ("(" in str(address) or str(address).lower() == "n/a" or not address) else address
     display_cat = "Dental" if (str(category).lower() == "n/a" or not category) else category
 
-    # Global Aesthetic Variables
+    # Ultra-clean email typography (Google/Apple standard)
     font = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
-    color_bg = "#f4f4f5"          # Soft light gray
-    color_card = "#ffffff"        # Pure white
-    color_text = "#27272a"        # Deep gray/black
-    color_muted = "#71717a"       # Muted gray
-    color_black = "#09090b"       # Vercel/Apple Black
-    color_emerald = "#10b981"     # Success Green
-    color_crimson = "#ef4444"     # Warning Red
+    text_color = "#202124" # Google's specific dark gray (easier on eyes than pure black)
+    brand_color = "#000000" # Pitch black for high-end contrast
+    accent_color = "#0d9488" # Teal for links/highlights
 
-    # Dynamic Modern Footer
+    # Executive Signature
     footer = f"""
-    <tr><td style="padding: 30px 40px; background-color: #fafafa; border-top: 1px solid #e4e4e7; text-align: center; border-radius: 0 0 16px 16px;">
-        <p style="margin: 0; font-family: {font}; font-size: 14px; font-weight: 600; color: {color_black};">Kiran Deb Mondal</p>
-        <p style="margin: 4px 0 16px 0; font-family: {font}; font-size: 13px; color: {color_muted};">Principal Technologist | Stop Web Rent</p>
-        <a href="https://wa.me/966572562151" style="color: {color_black}; text-decoration: none; font-family: {font}; font-size: 13px; font-weight: 500; border: 1px solid #e4e4e7; padding: 6px 12px; border-radius: 6px; background: #fff;">WhatsApp Support</a>
-        &nbsp;&nbsp;
-        <a href="https://www.stopwebrent.com" style="color: {color_black}; text-decoration: none; font-family: {font}; font-size: 13px; font-weight: 500; border: 1px solid #e4e4e7; padding: 6px 12px; border-radius: 6px; background: #fff;">StopWebRent.com</a>
-    </td></tr>
+    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+        <p style="margin: 0; font-family: {font}; font-size: 15px; font-weight: 600; color: #111827;">Kiran Deb Mondal</p>
+        <p style="margin: 2px 0 10px 0; font-family: {font}; font-size: 13px; color: #6b7280;">Principal Technologist | Stop Web Rent</p>
+        <p style="margin: 0; font-family: {font}; font-size: 13px;">
+            <a href="https://wa.me/966572562151" style="color: {accent_color}; text-decoration: none; font-weight: 500;">WhatsApp Support</a> &nbsp;|&nbsp; 
+            <a href="https://www.stopwebrent.com" style="color: {accent_color}; text-decoration: none; font-weight: 500;">www.StopWebRent.com</a>
+        </p>
+    </div>
     """
 
-    # Wrapper top
+    # Global Wrapper
     html_top = f"""
-    <html><body style="margin: 0; padding: 40px 20px; background-color: {color_bg};">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="center">
-    <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color: {color_card}; border-radius: 16px; border: 1px solid #e4e4e7; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+    <html><body style="margin: 0; padding: 0; background-color: #ffffff;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 30px 20px;">
     """
-    # Wrapper bottom
-    html_bottom = f"{footer}</table></td></tr></table></body></html>"
+    html_bottom = f"{footer}</div></body></html>"
+
+    # Bulletproof Button Generator (Renders perfectly in Gmail/Outlook)
+    def make_button(text, url, bg_color="#000000", text_color="#ffffff"):
+        return f"""
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 25px 0;">
+          <tr>
+            <td>
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td align="center" style="border-radius: 6px;" bgcolor="{bg_color}">
+                    <a href="{url}" target="_blank" style="font-size: 15px; font-family: {font}; color: {text_color}; text-decoration: none; border-radius: 6px; padding: 14px 28px; border: 1px solid {bg_color}; display: inline-block; font-weight: bold;">{text}</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        """
 
     if phase == 1:
         subject = parse_spintax("{Action Required|Google Maps alert|Missing link} for [Name]").replace("[Name]", name)
         html = html_top + f"""
-        <tr><td style="background-color: {color_black}; padding: 35px 40px; border-radius: 16px 16px 0 0; text-align: left;">
-            <span style="background-color: rgba(255,255,255,0.1); color: #fff; font-family: {font}; font-size: 11px; font-weight: bold; padding: 4px 10px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase;">System Audit</span>
-            <h1 style="color: #ffffff; font-family: {font}; font-size: 24px; margin: 15px 0 0 0; font-weight: 700;">Digital Asset Report</h1>
-        </td></tr>
-        <tr><td style="padding: 40px;">
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 20px 0; line-height: 1.6;">{greeting} {name} team,</p>
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 20px 0; line-height: 1.6;">I was researching <strong>{display_cat}</strong> clinics in <strong>{display_address}</strong>. Your practice has a phenomenal reputation, but you are currently missing a critical digital asset:</p>
-            
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #fef2f2; border-left: 4px solid {color_crimson}; margin: 25px 0;">
-                <tr><td style="padding: 16px 20px; font-family: {font};">
-                    <strong style="color: #991b1b; font-size: 15px;">⚠️ Missing Element:</strong><br>
-                    <span style="color: {color_crimson}; font-size: 15px; line-height: 1.5; display: inline-block; margin-top: 5px;">You do not have a <strong>"Website"</strong> link on your Google Maps profile. Google's algorithm actively pushes profiles without websites down the rankings.</span>
-                </td></tr>
-            </table>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">{greeting} {name} team,</p>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">I was researching <strong>{display_cat}</strong> clinics in <strong>{display_address}</strong>. Your practice has a phenomenal reputation, but you are currently missing a critical digital asset:</p>
+        
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">
+            <strong style="color: #dc2626;">⚠️ You do not have a "Website" link on your Google Maps profile.</strong><br>
+            Google's current algorithm actively pushes profiles without websites down the rankings, handing your high-value patients to competitors.
+        </p>
 
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 25px 0; line-height: 1.6;">I engineer <strong>0.1s High-Velocity</strong> websites specifically for healthcare clinics. Unlike Wix or Shopify, my Titan Architecture requires <strong>$0 in monthly hosting fees.</strong></p>
-            
-            <table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="center">
-                <a href="https://wa.me/966572562151?text=YES" style="display: inline-block; background-color: {color_black}; color: #ffffff; font-family: {font}; font-size: 15px; font-weight: 600; text-decoration: none; padding: 16px 32px; border-radius: 8px;">Request Free 24-Hour Preview</a>
-            </td></tr></table>
-            <p style="font-family: {font}; font-size: 13px; color: {color_muted}; text-align: center; margin: 15px 0 0 0;">(I'll use your current logo/photos. If you don't love it, you pay nothing.)</p>
-        </td></tr>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">I engineer <strong>0.1s High-Velocity</strong> websites specifically for healthcare clinics. Unlike Wix or Shopify, my Titan Architecture requires <strong>$0 in monthly hosting fees.</strong></p>
+        
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 10px 0; line-height: 1.6;"><strong>My Offer: A Free 24-Hour Preview</strong><br>I will use your current logo and photos to build a live demo. If you don't love the performance, you pay nothing.</p>
+
+        {make_button("Reply 'YES' via WhatsApp for Free Demo \u2192", "https://wa.me/966572562151?text=YES", accent_color)}
         """ + html_bottom
 
     elif phase == 2:
         subject = f"Re: {name} digital preview"
         html = html_top + f"""
-        <tr><td style="padding: 40px;">
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 20px 0; line-height: 1.6;">{greeting} again,</p>
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 25px 0; line-height: 1.6;">I wanted to follow up on my last email. When I build a Titan Engine site for a clinic like <strong>{name}</strong>, it's not a brochure—it's a lead generation machine.</p>
-            
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #fafafa; border: 1px solid #e4e4e7; border-radius: 12px; margin-bottom: 25px;">
-                <tr><td style="padding: 24px; font-family: {font};">
-                    <strong style="color: {color_black}; font-size: 16px;">Technical Specifications:</strong>
-                    <ul style="color: {color_text}; font-size: 15px; line-height: 1.8; margin: 10px 0 0 0; padding-left: 20px;">
-                        <li><strong>WhatsApp Routing:</strong> Patients book in one tap.</li>
-                        <li><strong>Zero-DB Architecture:</strong> 100% unhackable.</li>
-                        <li><strong>Mobile-Native:</strong> Installs directly to patient's phones.</li>
-                    </ul>
-                </td></tr>
-            </table>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">{greeting} again,</p>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 25px 0; line-height: 1.6;">I wanted to follow up on my last email. When I build a Titan Engine site for a clinic like <strong>{name}</strong>, it's not a brochure—it's a lead generation machine.</p>
+        
+        <div style="border-left: 3px solid #e5e7eb; padding-left: 15px; margin: 25px 0;">
+            <p style="font-family: {font}; font-size: 15px; color: #111827; margin: 0 0 10px 0; font-weight: 600;">Technical Specifications:</p>
+            <ul style="font-family: {font}; font-size: 15px; color: {text_color}; line-height: 1.8; margin: 0; padding-left: 20px;">
+                <li><strong>WhatsApp Routing:</strong> Patients book in one tap.</li>
+                <li><strong>Zero-DB Architecture:</strong> 100% unhackable infrastructure.</li>
+                <li><strong>Mobile-Native:</strong> Installs directly to patient's phones.</li>
+            </ul>
+        </div>
 
-            <table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="center">
-                <a href="https://hv-furniture-bit.github.io/dental-junction-behala/index.html" style="color: #2563eb; font-family: {font}; font-size: 16px; font-weight: 600; text-decoration: underline;">View the Live Demo Environment &rarr;</a>
-            </td></tr></table>
-            <p style="font-family: {font}; font-size: 15px; color: {color_text}; text-align: center; margin: 25px 0 0 0;">Reply <strong>"YES"</strong> and I will build a prototype for {name} today.</p>
-        </td></tr>
+        {make_button("View Live Demo Environment", "https://hv-furniture-bit.github.io/dental-junction-behala/index.html", brand_color)}
+
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 25px 0 0 0; line-height: 1.6;">Reply <strong>"YES"</strong> to this email and I will build a prototype for {name} today.</p>
         """ + html_bottom
 
     elif phase == 3:
         subject = parse_spintax("{Stop paying|How to save $1,800 on} website rent")
         html = html_top + f"""
-        <tr><td style="background-color: {color_black}; padding: 35px 40px; border-radius: 16px 16px 0 0; text-align: center;">
-            <h1 style="color: #ffffff; font-family: {font}; font-size: 22px; margin: 0; font-weight: 700;">Stop Renting. Start Owning.</h1>
-        </td></tr>
-        <tr><td style="padding: 40px;">
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 25px 0; line-height: 1.6; text-align: center;">Most clinics are trapped paying $30-$50 every month to Wix or Shopify. The Titan Engine changes that. <strong>Pay a one-time setup fee, and own it forever.</strong></p>
-            
-            <!-- Beautiful Invoice Table -->
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 1px solid #e4e4e7; border-radius: 8px; overflow: hidden; margin-bottom: 30px;">
-                <tr>
-                    <td style="background-color: #fafafa; padding: 15px; border-bottom: 1px solid #e4e4e7; font-family: {font}; font-size: 14px; color: {color_muted};">5-Year Projection</td>
-                    <td align="right" style="background-color: #fafafa; padding: 15px; border-bottom: 1px solid #e4e4e7; font-family: {font}; font-size: 14px; font-weight: bold; color: {color_black};">Titan Engine</td>
-                    <td align="right" style="background-color: #fafafa; padding: 15px; border-bottom: 1px solid #e4e4e7; font-family: {font}; font-size: 14px; color: {color_muted};">Wix/Shopify</td>
-                </tr>
-                <tr>
-                    <td style="padding: 15px; border-bottom: 1px solid #e4e4e7; font-family: {font}; font-size: 15px; color: {color_text};">Setup / Build Fee</td>
-                    <td align="right" style="padding: 15px; border-bottom: 1px solid #e4e4e7; font-family: {font}; font-size: 15px; font-weight: bold; color: {color_black};">$199</td>
-                    <td align="right" style="padding: 15px; border-bottom: 1px solid #e4e4e7; font-family: {font}; font-size: 15px; color: {color_muted};">$0</td>
-                </tr>
-                <tr>
-                    <td style="padding: 15px; border-bottom: 1px solid #e4e4e7; font-family: {font}; font-size: 15px; color: {color_text};">Monthly Hosting Rent</td>
-                    <td align="right" style="padding: 15px; border-bottom: 1px solid #e4e4e7; font-family: {font}; font-size: 15px; font-weight: bold; color: {color_emerald};">$0</td>
-                    <td align="right" style="padding: 15px; border-bottom: 1px solid #e4e4e7; font-family: {font}; font-size: 15px; color: {color_muted};">$1,740</td>
-                </tr>
-                <tr>
-                    <td style="background-color: #09090b; padding: 15px; font-family: {font}; font-size: 15px; font-weight: bold; color: #ffffff;">Total Cost</td>
-                    <td align="right" style="background-color: #09090b; padding: 15px; font-family: {font}; font-size: 15px; font-weight: bold; color: {color_emerald};">$274 <span style="font-size: 11px; font-weight: normal; color: #a1a1aa;">(w/ domain)</span></td>
-                    <td align="right" style="background-color: #09090b; padding: 15px; font-family: {font}; font-size: 15px; font-weight: bold; color: {color_crimson};">$2,115</td>
-                </tr>
-            </table>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">{greeting},</p>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 25px 0; line-height: 1.6;">Most clinics are trapped paying $30-$50 every month to Wix or Shopify. The Titan Engine changes that. <strong>Pay a one-time setup fee, and own it forever.</strong></p>
+        
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 25px; max-width: 500px;">
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #e5e7eb; font-family: {font}; font-size: 14px; color: #6b7280;">5-Year Projection</td>
+                <td align="right" style="padding: 12px 15px; border-bottom: 1px solid #e5e7eb; font-family: {font}; font-size: 14px; font-weight: bold; color: #111827;">Titan Engine</td>
+                <td align="right" style="padding: 12px 15px; border-bottom: 1px solid #e5e7eb; font-family: {font}; font-size: 14px; color: #6b7280;">Wix / Shopify</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #e5e7eb; font-family: {font}; font-size: 15px; color: {text_color};">Setup Fee</td>
+                <td align="right" style="padding: 12px 15px; border-bottom: 1px solid #e5e7eb; font-family: {font}; font-size: 15px; font-weight: bold; color: #111827;">$199</td>
+                <td align="right" style="padding: 12px 15px; border-bottom: 1px solid #e5e7eb; font-family: {font}; font-size: 15px; color: #6b7280;">$0</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #e5e7eb; font-family: {font}; font-size: 15px; color: {text_color};">Monthly Rent</td>
+                <td align="right" style="padding: 12px 15px; border-bottom: 1px solid #e5e7eb; font-family: {font}; font-size: 15px; font-weight: bold; color: {accent_color};">$0</td>
+                <td align="right" style="padding: 12px 15px; border-bottom: 1px solid #e5e7eb; font-family: {font}; font-size: 15px; color: #6b7280;">$1,740</td>
+            </tr>
+            <tr style="background-color: #f9fafb;">
+                <td style="padding: 15px; font-family: {font}; font-size: 15px; font-weight: bold; color: #111827; border-radius: 0 0 0 8px;">Total Cost</td>
+                <td align="right" style="padding: 15px; font-family: {font}; font-size: 15px; font-weight: bold; color: {accent_color};">$274</td>
+                <td align="right" style="padding: 15px; font-family: {font}; font-size: 15px; font-weight: bold; color: #dc2626; border-radius: 0 0 8px 0;">$2,115</td>
+            </tr>
+        </table>
 
-            <table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="center">
-                <a href="https://wa.me/966572562151" style="display: inline-block; background-color: {color_black}; color: #ffffff; font-family: {font}; font-size: 15px; font-weight: 600; text-decoration: none; padding: 16px 32px; border-radius: 8px;">Claim Your $1,841 Savings</a>
-            </td></tr></table>
-        </td></tr>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 10px 0; line-height: 1.6;"><strong>That is $1,841 in direct savings.</strong></p>
+
+        {make_button("Claim Your $1,841 Savings", "https://wa.me/966572562151", brand_color)}
         """ + html_bottom
 
     elif phase == 4:
         subject = parse_spintax("Update {name} website using Excel?")
         html = html_top + f"""
-        <tr><td style="padding: 40px;">
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 20px 0; line-height: 1.6;">{greeting},</p>
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 25px 0; line-height: 1.6;">Clinics avoid building websites because they hate complex dashboards and expensive web developers.</p>
-            
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; margin-bottom: 25px;">
-                <tr><td style="padding: 24px; font-family: {font};">
-                    <span style="font-size: 20px; display: block; margin-bottom: 8px;">📊</span>
-                    <strong style="color: #065f46; font-size: 16px;">The Spreadsheet CMS</strong>
-                    <p style="color: #047857; font-size: 15px; line-height: 1.6; margin: 8px 0 0 0;">Your website is hard-wired directly to a private Google Sheet. If your receptionist can type into Excel, they can manage your entire website. Change a price, and it updates globally in 1 second.</p>
-                </td></tr>
-            </table>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">{greeting},</p>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">Clinics avoid building websites because they hate complex dashboards and paying web developers.</p>
+        
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;"><strong>📊 The Spreadsheet CMS</strong><br>
+        Your website is hard-wired directly to a private Google Sheet. If your receptionist can type into Excel, they can manage your entire website. Change a price, and it updates globally in 1 second.</p>
 
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0; line-height: 1.6; text-align: center;">Should I build a quick prototype so you can see how easy this is?</p>
-        </td></tr>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0; line-height: 1.6;">Should I build a quick prototype so you can see how easy this is?</p>
         """ + html_bottom
 
     elif phase == 5:
         subject = parse_spintax("The 2026 Google algorithm & [Name]").replace("[Name]", name)
         html = html_top + f"""
-        <tr><td style="background-color: {color_crimson}; padding: 35px 40px; border-radius: 16px 16px 0 0; text-align: left;">
-            <h1 style="color: #ffffff; font-family: {font}; font-size: 22px; margin: 0; font-weight: 700;">Urgent Ranking Notice</h1>
-        </td></tr>
-        <tr><td style="padding: 40px;">
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 25px 0; line-height: 1.6;">{greeting}, I am reaching out regarding the missing website link on your Google Maps profile because the rules of local SEO are officially changing.</p>
-            
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; margin-bottom: 25px;">
-                <tr><td style="padding: 24px; font-family: {font};">
-                    <strong style="color: #991b1b; font-size: 16px;">The 2026 AI Algorithm Shift:</strong>
-                    <p style="color: #b91c1c; font-size: 15px; line-height: 1.6; margin: 8px 0 0 0;">Google’s AI search now significantly increases the weight of <i>linked, fast-loading</i> websites. Profiles without them are actively being suppressed and hidden from patients in the Map Pack.</p>
-                </td></tr>
-            </table>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">{greeting},</p>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 25px 0; line-height: 1.6;">I am reaching out regarding the missing website link on your Google Maps profile because the rules of local SEO are officially changing.</p>
+        
+        <div style="background-color: #fef2f2; border: 1px solid #fecaca; padding: 20px; border-radius: 8px; margin: 25px 0;">
+            <strong style="color: #991b1b; font-family: {font}; font-size: 16px;">The 2026 AI Algorithm Shift:</strong>
+            <p style="color: #b91c1c; font-family: {font}; font-size: 15px; line-height: 1.6; margin: 8px 0 0 0;">Google’s AI search now significantly increases the weight of <i>linked, fast-loading</i> websites. Profiles without them are actively being suppressed and hidden from patients in the Map Pack.</p>
+        </div>
 
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 25px 0; line-height: 1.6;">Our architecture achieves a <strong>100/100 Google PageSpeed score</strong>, ensuring you stay at the top.</p>
-            
-            <table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="center">
-                <a href="https://wa.me/966572562151?text=YES" style="display: inline-block; background-color: {color_crimson}; color: #ffffff; font-family: {font}; font-size: 15px; font-weight: 600; text-decoration: none; padding: 16px 32px; border-radius: 8px;">Secure Your Ranking Today</a>
-            </td></tr></table>
-        </td></tr>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 25px 0; line-height: 1.6;">Our architecture achieves a <strong>100/100 Google PageSpeed score</strong>, ensuring you stay at the top.</p>
+        
+        {make_button("Secure Your Ranking Today", "https://wa.me/966572562151?text=YES", "#dc2626")}
         """ + html_bottom
 
     elif phase == 6:
         subject = "am I off base here?"
         html = html_top + f"""
-        <tr><td style="padding: 40px;">
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 20px 0; line-height: 1.6;">{greeting},</p>
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 20px 0; line-height: 1.6;">I've reached out a few times about getting a high-speed, $0 monthly fee website set up for {name}.</p>
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0; line-height: 1.6;">Am I totally off base here, or is this just a really busy month for the clinic? Just let me know so I can update my notes.</p>
-        </td></tr>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">{greeting},</p>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">I've reached out a few times about getting a high-speed, $0 monthly fee website set up for {name}.</p>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0; line-height: 1.6;">Am I totally off base here, or is this just a really busy month for the clinic? Just let me know so I can update my notes.</p>
         """ + html_bottom
 
     elif phase == 7:
         subject = parse_spintax("{Closing my file|Last email} regarding [Name]").replace("[Name]", name)
         html = html_top + f"""
-        <tr><td style="padding: 40px;">
-            <div style="text-align: center; margin-bottom: 25px;">
-                <span style="background-color: #f4f4f5; border: 1px solid #e4e4e7; color: {color_muted}; font-family: {font}; font-size: 11px; font-weight: bold; padding: 4px 12px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase;">File Closed</span>
-            </div>
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 20px 0; line-height: 1.6;">{greeting},</p>
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 20px 0; line-height: 1.6;">Since I haven't heard back, I'll assume that fixing the missing website on your Google profile isn't a priority right now. This will be my last email.</p>
-            <p style="font-family: {font}; font-size: 16px; color: {color_text}; margin: 0 0 30px 0; line-height: 1.6;">If you ever get tired of losing map traffic to competitors, or if you just want to stop paying "Web Rent" to Wix or Shopify, you know where to find me. Wishing {name} a highly successful year.</p>
-            
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-top: 1px solid #e4e4e7; padding-top: 30px;"><tr><td align="center">
-                <p style="font-family: {font}; font-size: 14px; font-weight: 600; color: {color_black}; margin: 0 0 15px 0;">Ready to bypass the demo and deploy instantly?</p>
-                <a href="https://kiranmondal.gumroad.com/l/titanv50" style="display: inline-block; background-color: #ffffff; border: 1px solid #e4e4e7; color: {color_black}; font-family: {font}; font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 24px; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Purchase Direct via Gumroad</a>
-            </td></tr></table>
-        </td></tr>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">{greeting},</p>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 20px 0; line-height: 1.6;">Since I haven't heard back, I'll assume that fixing the missing website on your Google profile isn't a priority right now. This will be my last email.</p>
+        <p style="font-family: {font}; font-size: 16px; color: {text_color}; margin: 0 0 30px 0; line-height: 1.6;">If you ever get tired of losing map traffic to competitors, or if you just want to stop paying "Web Rent" to Wix or Shopify, you know where to find me. Wishing {name} a highly successful year.</p>
+        
+        <div style="margin-top: 35px; padding-top: 25px; border-top: 1px solid #e5e7eb;">
+            <p style="font-family: {font}; font-size: 15px; color: #111827; font-weight: 600; margin: 0 0 15px 0;">Ready to bypass the demo and deploy instantly?</p>
+            {make_button("Purchase Direct via Gumroad", "https://kiranmondal.gumroad.com/l/titanv50", brand_color)}
+        </div>
         """ + html_bottom
         
     return subject, html
-
 # --- 4. STREAMLIT UI SIDEBAR ---
 with st.sidebar:
     st.title("⚙️ Credentials")
