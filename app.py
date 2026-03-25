@@ -118,7 +118,7 @@ def get_campaign_content(phase, name, category, address):
                     </ul>
                 </div>
                 <div style="text-align: center; margin: 30px 0;">
-                    <a href="https://hv-furniture-bit.github.io/dental-junction-behala/index.html" style="color: {accent}; font-weight: bold; font-size: 16px; text-decoration: underline;">👉 Click here to play with a live demo of a clinic we recently built</a>
+                    <a href="https://tvkfurniture-bit.github.io/ghosh-dental/index.html" style="color: {accent}; font-weight: bold; font-size: 16px; text-decoration: underline;">👉 Click here to play with a live demo of a clinic we recently built</a>
                 </div>
                 <p style="font-size: 15px; line-height: 1.6; color: {text_main}; text-align: center;">
                     Would you like me to build a custom prototype for {name}? Just reply "YES".
