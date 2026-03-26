@@ -152,7 +152,7 @@ def get_campaign_content(phase, name, category, address):
         {button("Review Your Free Prototype &rarr;", "https://wa.me/966572562151?text=YES")}
         
         <p align="center" style="margin: 0; font-family: {font}; font-size: 13px;">
-            <a href="https://hv-furniture-bit.github.io/dental-junction-behala/index.html" style="color: {color_teal}; font-weight: 600; text-decoration: underline;">Or click here to view a live tech demo</a>
+            <a href="https://tvkfurniture-bit.github.io/ghosh-dental/index.html" style="color: {color_teal}; font-weight: 600; text-decoration: underline;">Or click here to view a live tech demo</a>
         </p>
         """
         html = build_premium_html(body)
